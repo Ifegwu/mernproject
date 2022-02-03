@@ -11,7 +11,7 @@ const signin = async (req, res) => {
     if (!user)
       return res.status('401').json({
         error: "User not found"
-      })
+    })
 
     if (!user.authenticate(req.body.password)) {
       return res.status('401').send({
@@ -55,7 +55,7 @@ const signout = (req, res) => {
 const requireSignin = expressJwt({
   secret: config.jwtSecret,
   userProperty: 'auth',
-  algorithms: ['RS256'] 
+  algorithms: ['sha1', 'RS256', 'HS256'],
 })
 
 const hasAuthorization = (req, res, next) => {
